@@ -87,7 +87,8 @@ export default function ContactForm() {
         </div>
 
         <Reveal>
-          <div className="glass rounded-3xl p-6 md:p-8">
+          <div className="rounded-3xl bg-gradient-to-br from-violet/40 via-white/5 to-cyan/30 p-px shadow-glow">
+            <div className="rounded-3xl bg-surface/80 p-6 backdrop-blur-xl md:p-8">
             {status === "success" ? (
               <div className="flex flex-col items-center gap-4 py-10 text-center">
                 <span className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-violet to-cyan text-white">
@@ -207,6 +208,7 @@ export default function ContactForm() {
                 </button>
               </form>
             )}
+            </div>
           </div>
         </Reveal>
       </div>

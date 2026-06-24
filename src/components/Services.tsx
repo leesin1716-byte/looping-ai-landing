@@ -17,9 +17,9 @@ export default function Services() {
       <div className="mt-14 grid gap-6 md:grid-cols-3">
         {services.map((service, i) => (
           <Reveal key={service.id} delay={i * 0.1}>
-            <TiltCard className="h-full p-7">
+            <TiltCard className="group/card h-full p-7 transition-shadow duration-300 hover:border-white/20 hover:shadow-glow">
               <div className="flex h-full flex-col gap-5">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet/30 to-cyan/20 text-violet-soft">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet/30 to-cyan/20 text-violet-soft transition-transform duration-300 group-hover/card:scale-110">
                   <Icon name={service.icon as IconName} />
                 </span>
                 <div className="flex flex-col gap-2">
