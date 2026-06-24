@@ -55,7 +55,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl"
+            className="break-keep font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-7xl"
           >
             {lines.map((line, i) => (
               <span

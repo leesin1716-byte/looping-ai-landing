@@ -17,7 +17,13 @@ export default function Portfolio() {
         subtitle="페이지 퀄리티가 곧 실력입니다. 직접 만든 결과물을 확인해 보세요."
       />
 
-      <div className="mt-14 grid gap-6 md:grid-cols-2">
+      <div
+        className={
+          portfolio.length > 1
+            ? "mt-14 grid gap-6 md:grid-cols-2"
+            : "mx-auto mt-14 grid max-w-3xl gap-6"
+        }
+      >
         {portfolio.map((p, i) => (
           <Reveal key={p.id} delay={i * 0.1}>
             <a
