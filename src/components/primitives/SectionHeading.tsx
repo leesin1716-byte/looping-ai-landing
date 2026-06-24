@@ -27,13 +27,13 @@ export default function SectionHeading({
           {eyebrow}
         </span>
       )}
-      <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
+      <h2 className="break-keep font-display text-3xl font-bold tracking-tight md:text-5xl">
         {title}
       </h2>
       {subtitle && (
         <p
           className={cn(
-            "text-ink-muted md:text-lg",
+            "break-keep text-ink-muted md:text-lg",
             align === "center" && "max-w-2xl",
           )}
         >

@@ -14,7 +14,8 @@ export type IconName =
   | "close"
   | "mail"
   | "github"
-  | "loop";
+  | "loop"
+  | "chevron-down";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   rocket: (
@@ -73,6 +74,7 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <path d="M17 3v4h-4" />
     </>
   ),
+  "chevron-down": <path d="M6 9l6 6 6-6" />,
 };
 
 export default function Icon({

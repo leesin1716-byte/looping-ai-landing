@@ -5,6 +5,7 @@ import { cn } from "@/src/lib/cn";
 import MagneticButton from "@/src/components/primitives/MagneticButton";
 import GradientBlob from "@/src/components/primitives/GradientBlob";
 import Marquee from "@/src/components/primitives/Marquee";
+import Icon from "@/src/components/primitives/Icon";
 import SplineEmbed from "@/src/components/SplineEmbed";
 import { useReducedMotion } from "@/src/lib/useReducedMotion";
 
@@ -38,6 +39,7 @@ export default function Hero() {
       <GradientBlob className="-left-40 top-0" />
       <GradientBlob className="-right-40 bottom-0" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-bg/50 via-bg/20 to-bg" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-bg via-bg/40 to-transparent" />
 
       <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
         <motion.div
@@ -69,7 +71,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="max-w-xl text-lg text-ink-muted md:text-xl"
+            className="max-w-xl break-keep text-lg text-ink-muted md:text-xl"
           >
             {site.hero.sub}
           </motion.p>
@@ -86,11 +88,16 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-6 flex flex-col items-center gap-3">
+      <div className="absolute inset-x-0 bottom-6 flex flex-col items-center gap-4">
+        <a
+          href="#services"
+          aria-label={site.hero.scrollCue}
+          className="flex flex-col items-center gap-1 text-ink-faint transition-colors hover:text-ink-muted"
+        >
+          <span className="text-xs tracking-wide">{site.hero.scrollCue}</span>
+          <Icon name="chevron-down" size={18} className="animate-float" />
+        </a>
         <Marquee items={site.marquee} className="fade-x w-full max-w-3xl" />
-        <span className="text-xs tracking-wide text-ink-faint">
-          {site.hero.scrollCue}
-        </span>
       </div>
     </section>
   );
