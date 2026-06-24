@@ -43,12 +43,35 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Looping Ai",
+  description:
+    "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게 제작하는 AI 바이브코더.",
+  url: "https://looping-ai.vercel.app",
+  email: "hello@looping.ai",
+  areaServed: "KR",
+  knowsLanguage: "ko",
+  serviceType: ["랜딩페이지 제작", "AI 웹사이트 개발", "대시보드·웹앱 개발"],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko" className={display.variable}>
       <body className="grain min-h-screen">
+        <a
+          href="#top"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+        >
+          메인 콘텐츠로 건너뛰기
+        </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
