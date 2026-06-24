@@ -8,12 +8,30 @@ import Icon from "@/src/components/primitives/Icon";
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const els = site.nav
+      .map((n) => document.getElementById(n.href.slice(1)))
+      .filter((el): el is HTMLElement => el !== null);
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(`#${e.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
   }, []);
 
   return (
@@ -40,16 +58,28 @@ export default function Nav() {
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
-          {site.nav.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-ink-muted transition-colors hover:text-ink"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {site.nav.map((link) => {
+            const isActive = active === link.href;
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={cn(
+                    "group/nav relative text-sm transition-colors hover:text-ink",
+                    isActive ? "text-ink" : "text-ink-muted",
+                  )}
+                >
+                  {link.label}
+                  <span
+                    className={cn(
+                      "absolute -bottom-1.5 left-0 h-px w-full origin-left bg-gradient-to-r from-violet to-cyan transition-transform duration-300",
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover/nav:scale-x-100",
+                    )}
+                  />
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden md:block">
