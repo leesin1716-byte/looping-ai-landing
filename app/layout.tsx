@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import SmoothScroll from "@/src/components/primitives/SmoothScroll";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -47,7 +48,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko" className={display.variable}>
-      <body className="grain min-h-screen">{children}</body>
+      <body className="grain min-h-screen">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
