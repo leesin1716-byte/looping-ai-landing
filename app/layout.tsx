@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import SmoothScroll from "@/src/components/primitives/SmoothScroll";
 import "./globals.css";
@@ -41,6 +41,11 @@ export const metadata: Metadata = {
     description: "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게.",
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#07070C",
+  colorScheme: "dark",
 };
 
 const jsonLd = {

@@ -63,7 +63,7 @@ export default function ContactForm() {
   return (
     <Section id="contact">
       <GradientBlob className="left-1/2 top-0 -translate-x-1/2 opacity-25" />
-      <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-6">
           <SectionHeading
             align="left"
