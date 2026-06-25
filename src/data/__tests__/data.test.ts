@@ -11,10 +11,19 @@ describe("content data", () => {
     expect(services.map((s) => s.id)).toEqual(["landing", "ai-web", "dashboard"]);
   });
 
-  it("includes the confirmed World Cup dashboard project", () => {
+  it("lists the current client projects with thumbnails (World Cup retired)", () => {
+    expect(portfolio.map((p) => p.id)).toEqual([
+      "happych",
+      "kwpa",
+      "waterclean",
+      "academy",
+    ]);
+    // the retired World Cup dashboard must no longer be listed
     expect(
-      portfolio.some((p) => p.url === "https://worldcup-korea-dashboard.vercel.app/"),
-    ).toBe(true);
+      portfolio.some((p) => p.url.includes("worldcup-korea-dashboard")),
+    ).toBe(false);
+    // every case study now ships a real screenshot thumbnail
+    expect(portfolio.every((p) => Boolean(p.image))).toBe(true);
   });
 
   it("has unique ids per dataset", () => {

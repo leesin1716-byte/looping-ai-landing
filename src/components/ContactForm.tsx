@@ -90,7 +90,10 @@ export default function ContactForm() {
           <div className="rounded-3xl bg-gradient-to-br from-violet/40 via-white/5 to-cyan/30 p-px shadow-glow">
             <div className="rounded-3xl bg-surface/80 p-6 backdrop-blur-xl md:p-8">
             {status === "success" ? (
-              <div className="flex flex-col items-center gap-4 py-10 text-center">
+              <div
+                role="status"
+                className="flex flex-col items-center gap-4 py-10 text-center"
+              >
                 <span className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-violet to-cyan text-white">
                   <Icon name="check" size={28} />
                 </span>
@@ -133,7 +136,9 @@ export default function ContactForm() {
                     value={values.name}
                     onChange={update("name")}
                     placeholder="홍길동"
+                    required
                     aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "name-error" : undefined}
                     className={cn(
                       fieldBase,
                       errors.name ? "border-magenta/70" : "border-white/10",
@@ -148,7 +153,9 @@ export default function ContactForm() {
                     value={values.email}
                     onChange={update("email")}
                     placeholder="you@example.com"
+                    required
                     aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                     className={cn(
                       fieldBase,
                       errors.email ? "border-magenta/70" : "border-white/10",
@@ -161,7 +168,11 @@ export default function ContactForm() {
                     id="projectType"
                     value={values.projectType}
                     onChange={update("projectType")}
+                    required
                     aria-invalid={!!errors.projectType}
+                    aria-describedby={
+                      errors.projectType ? "projectType-error" : undefined
+                    }
                     className={cn(
                       fieldBase,
                       "appearance-none bg-surface",
@@ -186,7 +197,9 @@ export default function ContactForm() {
                     onChange={update("message")}
                     rows={4}
                     placeholder="어떤 걸 만들고 싶으신가요? 자유롭게 적어 주세요."
+                    required
                     aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "message-error" : undefined}
                     className={cn(
                       fieldBase,
                       "resize-none",
@@ -196,7 +209,9 @@ export default function ContactForm() {
                 </Field>
 
                 {status === "error" && (
-                  <p className="text-sm text-magenta-soft">{serverError}</p>
+                  <p role="alert" className="text-sm text-magenta-soft">
+                    {serverError}
+                  </p>
                 )}
 
                 <button
@@ -233,7 +248,15 @@ function Field({
         {label}
       </label>
       {children}
-      {error && <span className="text-xs text-magenta-soft">{error}</span>}
+      {error && (
+        <span
+          id={`${id}-error`}
+          role="alert"
+          className="text-xs text-magenta-soft"
+        >
+          {error}
+        </span>
+      )}
     </div>
   );
 }
