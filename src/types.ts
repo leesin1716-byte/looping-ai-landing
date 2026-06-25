@@ -46,6 +46,11 @@ export type WhyPoint = {
   icon: string;
 };
 
+export type Faq = {
+  q: string;
+  a: string;
+};
+
 export type SiteConfig = {
   brand: string;
   nav: NavLink[];

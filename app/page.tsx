@@ -6,6 +6,7 @@ import Portfolio from "@/src/components/Portfolio";
 import Process from "@/src/components/Process";
 import WhyUs from "@/src/components/WhyUs";
 import Testimonials from "@/src/components/Testimonials";
+import Faq from "@/src/components/Faq";
 import ContactForm from "@/src/components/ContactForm";
 import Footer from "@/src/components/Footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Process />
         <WhyUs />
         <Testimonials />
+        <Faq />
         <ContactForm />
       </main>
       <Footer />
