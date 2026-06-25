@@ -28,6 +28,7 @@
   --animate-blob: blob 18s ease-in-out infinite;
   --animate-marquee: marquee 28s linear infinite;
   --animate-float: float 4s ease-in-out infinite;
+  --animate-aurora: aurora 26s ease-in-out infinite;
 
   @keyframes blob {
     0%,
@@ -56,6 +57,15 @@
     }
     50% {
       transform: translateY(-8px);
+    }
+  }
+  @keyframes aurora {
+    0%,
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(22deg) scale(1.18);
     }
   }
 }

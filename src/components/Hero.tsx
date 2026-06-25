@@ -12,7 +12,7 @@ import MagneticButton from "@/src/components/primitives/MagneticButton";
 import GradientBlob from "@/src/components/primitives/GradientBlob";
 import Marquee from "@/src/components/primitives/Marquee";
 import Icon from "@/src/components/primitives/Icon";
-import SplineEmbed from "@/src/components/SplineEmbed";
+import HeroBackdrop from "@/src/components/primitives/HeroBackdrop";
 import { useReducedMotion } from "@/src/lib/useReducedMotion";
 
 export default function Hero() {
@@ -55,9 +55,9 @@ export default function Hero() {
     >
       <motion.div
         style={{ y: bgY }}
-        className="pointer-events-none absolute inset-0 -z-10 opacity-80"
+        className="pointer-events-none absolute inset-0 -z-10"
       >
-        <SplineEmbed className="h-full w-full" />
+        <HeroBackdrop className="h-full w-full" />
       </motion.div>
       <GradientBlob className="-left-40 top-0" />
       <GradientBlob className="-right-40 bottom-0" />

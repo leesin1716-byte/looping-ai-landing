@@ -84,14 +84,13 @@ export default function RootLayout({
   return (
     <html lang="ko" className={display.variable}>
       <body className="grain min-h-screen">
-        {/* Speed up the render-blocking Pretendard font CSS/fonts and the hero 3D scene.
-            React hoists these link tags into <head>. */}
+        {/* Speed up the render-blocking Pretendard font CSS/fonts.
+            React hoists this link into <head>. */}
         <link
           rel="preconnect"
           href="https://cdn.jsdelivr.net"
           crossOrigin="anonymous"
         />
-        <link rel="preconnect" href="https://my.spline.design" />
         <a
           href="#top"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-sm focus:text-white"
