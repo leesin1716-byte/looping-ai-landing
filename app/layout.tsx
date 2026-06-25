@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import SmoothScroll from "@/src/components/primitives/SmoothScroll";
+import ScrollProgress from "@/src/components/primitives/ScrollProgress";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -77,6 +78,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <ScrollProgress />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
