@@ -42,6 +42,7 @@ export default function Nav() {
       )}
     >
       <nav
+        aria-label="주 메뉴"
         className={cn(
           "mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-2.5 md:px-6 transition-all duration-300",
           scrolled ? "glass shadow-glow" : "border border-transparent",
@@ -64,6 +65,7 @@ export default function Nav() {
               <li key={link.href}>
                 <a
                   href={link.href}
+                  aria-current={isActive || undefined}
                   className={cn(
                     "group/nav relative text-sm transition-colors hover:text-ink",
                     isActive ? "text-ink" : "text-ink-muted",
@@ -102,17 +104,24 @@ export default function Nav() {
       {open && (
         <div className="mx-auto mt-2 max-w-6xl px-4 md:hidden">
           <ul className="glass flex flex-col gap-1 rounded-2xl p-3">
-            {site.nav.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-ink-muted transition-colors hover:bg-white/5 hover:text-ink"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+            {site.nav.map((link) => {
+              const isActive = active === link.href;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    aria-current={isActive || undefined}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "block rounded-xl px-4 py-3 transition-colors hover:bg-white/5 hover:text-ink",
+                      isActive ? "bg-white/5 text-ink" : "text-ink-muted",
+                    )}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
             <li className="px-1 pt-2">
               <a
                 href="#contact"
