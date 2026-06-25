@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import SmoothScroll from "@/src/components/primitives/SmoothScroll";
 import ScrollProgress from "@/src/components/primitives/ScrollProgress";
+import { services } from "@/src/data/services";
 import "./globals.css";
+
+const SITE_URL = "https://looping-ai-landing.vercel.app";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -12,7 +15,7 @@ const display = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://looping-ai-landing.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Looping Ai — 당신의 아이디어, 며칠 만에 웹으로",
     template: "%s · Looping Ai",
@@ -55,11 +58,24 @@ const jsonLd = {
   name: "Looping Ai",
   description:
     "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게 제작하는 AI 바이브코더.",
-  url: "https://looping-ai-landing.vercel.app",
+  url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
   email: "hello@looping.ai",
   areaServed: "KR",
   knowsLanguage: "ko",
   serviceType: ["랜딩페이지 제작", "AI 웹사이트 개발", "대시보드·웹앱 개발"],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "제작 서비스",
+    itemListElement: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.title,
+        description: s.desc,
+      },
+    })),
+  },
 };
 
 export default function RootLayout({
