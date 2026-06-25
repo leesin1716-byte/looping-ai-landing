@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE = "https://looping-ai.vercel.app";
+const BASE = "https://looping-ai-landing.vercel.app";
 
 export default function robots(): MetadataRoute.Robots {
   return {

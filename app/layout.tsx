@@ -12,7 +12,7 @@ const display = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://looping-ai.vercel.app"),
+  metadataBase: new URL("https://looping-ai-landing.vercel.app"),
   title: {
     default: "Looping Ai — 당신의 아이디어, 며칠 만에 웹으로",
     template: "%s · Looping Ai",
@@ -55,7 +55,7 @@ const jsonLd = {
   name: "Looping Ai",
   description:
     "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게 제작하는 AI 바이브코더.",
-  url: "https://looping-ai.vercel.app",
+  url: "https://looping-ai-landing.vercel.app",
   email: "hello@looping.ai",
   areaServed: "KR",
   knowsLanguage: "ko",
