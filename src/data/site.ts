@@ -25,9 +25,8 @@ export const site: SiteConfig = {
     "랜딩페이지",
     "반응형",
   ],
-  socials: [
-    { label: "Email", href: "mailto:hello@looping.ai" },
-    { label: "GitHub", href: "https://github.com/" },
-  ],
+  // NOTE: add real social/profile URLs here before launch (a broken GitHub
+  // placeholder was removed). mailto is safe to keep.
+  socials: [{ label: "Email", href: "mailto:hello@looping.ai" }],
   contactEmail: "hello@looping.ai",
 };

@@ -2,14 +2,14 @@
 
 AI 바이브코더 **Looping Ai**의 서비스(수주) 랜딩페이지. 단일 전환 목표는 **문의 폼 제출**이며, 페이지의 비주얼·인터랙션 퀄리티 자체가 포트폴리오 역할을 합니다.
 
-다크 프리미엄 + 네온 톤, Spline 3D 히어로, 스크롤 리빌·3D 틸트·마그네틱 버튼·카운트업 등 인터랙션을 갖춘 한국어 단일 페이지입니다.
+다크 프리미엄 + 네온 톤, 커스텀 3D 히어로(Three.js), 스크롤 리빌·3D 틸트·마그네틱 버튼·카운트업 등 인터랙션을 갖춘 한국어 단일 페이지입니다.
 
 ## 기술 스택
 
 - **Next.js 15 (App Router) + TypeScript**
 - **Tailwind CSS v4** (CSS `@theme` 디자인 토큰)
 - **Framer Motion** (애니메이션) · **Lenis** (부드러운 스크롤)
-- **Spline** (iframe 임베드, 지연 로딩)
+- **Three.js + React Three Fiber + drei** (커스텀 네온 3D 히어로, 지연 로딩)
 - 폰트: **Pretendard**(본문/한글) + **Space Grotesk**(디스플레이)
 - 문의 폼: **Web3Forms**
 - 테스트: **Vitest** (검증·카운트업 로직)
@@ -52,12 +52,15 @@ npm run lint     # 린트
 | `src/data/testimonials.ts` | 후기 (현재 예시값) |
 | `src/data/why.ts` | 차별점 |
 
-> 실적 숫자와 후기는 플레이스홀더입니다. 실제 값으로 위 파일들만 교체하세요.
+> **⚠️ 출시 전 체크리스트 (실제 데이터로 교체):**
+> - `stats.ts` 실적 숫자 · `testimonials.ts` 후기 — 현재 **플레이스홀더(예시값)**. 실제 값으로 바꾸기 전에는 사실인 것처럼 노출하지 마세요.
+> - `site.ts`의 연락 이메일(`hello@looping.ai`)과 소셜 링크를 실제 값으로 설정 (깨진 GitHub 플레이스홀더는 제거됨).
+> - Vercel 환경변수 `NEXT_PUBLIC_WEB3FORMS_KEY`를 설정해야 문의 폼이 실제로 전송됩니다.
 
 ## 접근성·성능
 
-- `prefers-reduced-motion`을 존중합니다: 블롭/틸트/마퀴/카운트업 정지, Spline은 정적 그라데이션으로 폴백.
-- Spline 히어로와 포트폴리오 미리보기는 지연 로딩됩니다.
+- `prefers-reduced-motion`을 존중합니다: 블롭/틸트/마퀴/카운트업 정지, 3D 히어로는 정적 오로라 배경으로 폴백.
+- 3D 히어로(Three.js)는 지연 로딩되며, 모바일에서는 오로라 배경만 표시해 가볍게 유지합니다.
 - 모바일 우선 반응형.
 
 ## 배포 (Vercel)
