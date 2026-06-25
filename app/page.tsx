@@ -3,6 +3,7 @@ import Hero from "@/src/components/Hero";
 import StatsBar from "@/src/components/StatsBar";
 import Services from "@/src/components/Services";
 import Portfolio from "@/src/components/Portfolio";
+import CtaBand from "@/src/components/CtaBand";
 import Process from "@/src/components/Process";
 import WhyUs from "@/src/components/WhyUs";
 import Testimonials from "@/src/components/Testimonials";
@@ -19,6 +20,7 @@ export default function Home() {
         <StatsBar />
         <Services />
         <Portfolio />
+        <CtaBand />
         <Process />
         <WhyUs />
         <Testimonials />
