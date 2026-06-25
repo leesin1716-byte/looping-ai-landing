@@ -32,11 +32,14 @@ export default function Portfolio() {
               rel="noopener noreferrer"
               className="group block h-full overflow-hidden rounded-2xl glass transition-all duration-300 hover:-translate-y-1 hover:shadow-glow"
             >
-              <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-surface">
+              <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-surface bg-[radial-gradient(circle_at_50%_30%,rgba(139,92,246,0.14),transparent_60%)]">
                 <div className="absolute inset-x-0 top-0 z-10 flex h-8 items-center gap-1.5 border-b border-white/10 bg-bg/70 px-3 backdrop-blur">
                   <span className="h-2.5 w-2.5 rounded-full bg-magenta/70" />
                   <span className="h-2.5 w-2.5 rounded-full bg-violet/70" />
                   <span className="h-2.5 w-2.5 rounded-full bg-cyan/70" />
+                  <span className="ml-2 max-w-[60%] truncate rounded-md bg-white/5 px-2 py-0.5 text-[10px] text-ink-faint">
+                    {new URL(p.url).hostname}
+                  </span>
                 </div>
 
                 {p.image ? (
