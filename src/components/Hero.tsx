@@ -13,6 +13,7 @@ import GradientBlob from "@/src/components/primitives/GradientBlob";
 import Marquee from "@/src/components/primitives/Marquee";
 import Icon from "@/src/components/primitives/Icon";
 import HeroBackdrop from "@/src/components/primitives/HeroBackdrop";
+import HeroScene from "@/src/components/primitives/HeroScene";
 import { useReducedMotion } from "@/src/lib/useReducedMotion";
 
 export default function Hero() {
@@ -63,6 +64,9 @@ export default function Hero() {
       <GradientBlob className="-right-40 bottom-0" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-bg/50 via-bg/20 to-bg" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-bg via-bg/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 -z-10 hidden sm:block">
+        <HeroScene className="h-full w-full" />
+      </div>
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
