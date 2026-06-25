@@ -20,7 +20,6 @@ export const site: SiteConfig = {
     "Tailwind",
     "AI 통합",
     "Framer Motion",
-    "Spline 3D",
     "Vercel 배포",
     "대시보드",
     "랜딩페이지",
