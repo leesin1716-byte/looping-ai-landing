@@ -22,6 +22,7 @@ export type ProcessStep = {
   step: number;
   title: string;
   desc: string;
+  icon: string;
 };
 
 export type Stat = {
