@@ -1,5 +1,11 @@
 "use client";
-import { motion, type Variants } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "framer-motion";
 import { site } from "@/src/data/site";
 import { cn } from "@/src/lib/cn";
 import MagneticButton from "@/src/components/primitives/MagneticButton";
@@ -12,6 +18,19 @@ import { useReducedMotion } from "@/src/lib/useReducedMotion";
 export default function Hero() {
   const reduced = useReducedMotion();
   const lines = site.hero.headline.split("\n");
+
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 130]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.75],
+    [1, reduced ? 1 : 0],
+  );
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 70]);
 
   const container: Variants = {
     hidden: {},
@@ -30,18 +49,25 @@ export default function Hero() {
 
   return (
     <section
+      ref={heroRef}
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden pb-20 pt-28"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-80">
+      <motion.div
+        style={{ y: bgY }}
+        className="pointer-events-none absolute inset-0 -z-10 opacity-80"
+      >
         <SplineEmbed className="h-full w-full" />
-      </div>
+      </motion.div>
       <GradientBlob className="-left-40 top-0" />
       <GradientBlob className="-right-40 bottom-0" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-bg/50 via-bg/20 to-bg" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-bg via-bg/40 to-transparent" />
 
-      <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="mx-auto w-full max-w-6xl px-5 md:px-8"
+      >
         <motion.div
           variants={container}
           initial="hidden"
@@ -86,7 +112,7 @@ export default function Hero() {
             </MagneticButton>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       <div className="absolute inset-x-0 bottom-6 flex flex-col items-center gap-4">
         <a
