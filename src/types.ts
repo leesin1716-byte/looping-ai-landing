@@ -6,6 +6,7 @@ export type Service = {
   desc: string;
   bullets: string[];
   icon: string;
+  image?: string;
 };
 
 export type Project = {
