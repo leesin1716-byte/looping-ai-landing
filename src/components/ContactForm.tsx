@@ -238,7 +238,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet to-cyan px-7 py-3.5 font-medium text-white shadow-glow transition hover:shadow-[0_0_60px_-6px_rgba(139,92,246,0.7)] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet to-cyan px-7 py-3.5 font-medium text-white shadow-glow transition hover:shadow-[0_0_60px_-6px_rgba(139,92,246,0.7)] motion-safe:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "submitting" ? "보내는 중…" : "문의 보내기"}
                 </button>

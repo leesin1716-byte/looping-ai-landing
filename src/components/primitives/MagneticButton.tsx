@@ -49,6 +49,7 @@ export default function MagneticButton({
       onClick={onClick}
       onMouseMove={onMove}
       onMouseLeave={reset}
+      whileTap={reduced ? undefined : { scale: 0.96 }}
       style={{ x: sx, y: sy }}
       className={cn(base, styles, className)}
     >

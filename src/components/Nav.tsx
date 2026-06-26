@@ -131,7 +131,7 @@ export default function Nav() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="block rounded-xl bg-gradient-to-r from-violet to-cyan px-4 py-3 text-center font-medium text-white"
+                className="block rounded-xl bg-gradient-to-r from-violet to-cyan px-4 py-3 text-center font-medium text-white transition-transform motion-safe:active:scale-[0.98]"
               >
                 {site.hero.cta}
               </a>
