@@ -38,11 +38,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     siteName: "Looping Ai",
+    url: SITE_URL,
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Looping Ai — 당신의 아이디어, 며칠 만에 웹으로",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Looping Ai — 당신의 아이디어, 며칠 만에 웹으로",
     description: "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게.",
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -59,7 +69,7 @@ const jsonLd = {
   description:
     "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게 제작하는 AI 바이브코더.",
   url: SITE_URL,
-  image: `${SITE_URL}/opengraph-image`,
+  image: `${SITE_URL}/og.png`,
   email: "wchhistory@naver.com",
   areaServed: "KR",
   knowsLanguage: "ko",
