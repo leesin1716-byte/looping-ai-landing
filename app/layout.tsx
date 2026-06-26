@@ -84,6 +84,12 @@ export default function RootLayout({
   return (
     <html lang="ko" className={display.variable}>
       <body className="grain min-h-screen">
+        {/* Apply the saved/system theme before paint to avoid a flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light')}}catch(e){}`,
+          }}
+        />
         {/* Speed up the render-blocking Pretendard font CSS/fonts.
             React hoists this link into <head>. */}
         <link

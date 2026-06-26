@@ -4,6 +4,7 @@ import { site } from "@/src/data/site";
 import { cn } from "@/src/lib/cn";
 import MagneticButton from "@/src/components/primitives/MagneticButton";
 import Icon from "@/src/components/primitives/Icon";
+import ThemeToggle from "@/src/components/primitives/ThemeToggle";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -84,21 +85,25 @@ export default function Nav() {
           })}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           <MagneticButton href="#contact" className="px-5 py-2.5 text-sm">
             {site.hero.cta}
           </MagneticButton>
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-xl glass md:hidden"
-        >
-          <Icon name={open ? "close" : "menu"} size={20} />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-10 w-10 place-items-center rounded-xl glass"
+          >
+            <Icon name={open ? "close" : "menu"} size={20} />
+          </button>
+        </div>
       </nav>
 
       {open && (
