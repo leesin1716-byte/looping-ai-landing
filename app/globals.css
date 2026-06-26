@@ -116,7 +116,9 @@ html.light {
   --color-surface: #ffffff;
   --color-ink: #15151f;
   --color-ink-muted: #54545f;
-  --color-ink-faint: #8b8b99;
+  /* #8b8b99 was only 3.36:1 on white (fails WCAG AA); #75757f is 4.56:1
+     while staying clearly the faintest tier above ink-muted. */
+  --color-ink-faint: #75757f;
 }
 html.light body {
   background-image: radial-gradient(
