@@ -1,13 +1,17 @@
 "use client";
 import { motion, useScroll, useSpring } from "framer-motion";
+import { useReducedMotion } from "@/src/lib/useReducedMotion";
 
 export default function ScrollProgress() {
+  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
+  const smooth = useSpring(scrollYProgress, {
     stiffness: 120,
     damping: 30,
     mass: 0.3,
   });
+  // Reduced-motion: track scroll exactly (no springy easing/overshoot).
+  const scaleX = reduced ? scrollYProgress : smooth;
   return (
     <motion.div
       aria-hidden
