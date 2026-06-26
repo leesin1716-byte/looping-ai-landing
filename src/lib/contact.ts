@@ -23,20 +23,12 @@ export function validateContact(v: ContactValues): {
 }
 
 /**
- * Submits a contact inquiry. Persistence and notification are independent:
- *   1) POST to our `/api/contact` route → server-side validation + Postgres.
- *   2) POST to Web3Forms from the client → email alert (Web3Forms' free plan
- *      only allows client-side calls; the access key is public by design).
- * Succeeds if either channel works.
+ * Submits a contact inquiry to our `/api/contact` route, which validates
+ * server-side, stores it in the DB, and sends the email notification (Resend).
  */
 export async function submitContact(
   v: ContactValues,
 ): Promise<{ ok: boolean; error?: string }> {
-  // Honeypot (also enforced server-side) — pretend success, send nothing.
-  if (v.company && v.company.trim()) return { ok: true };
-
-  let dbOk = false;
-  let dbError = "";
   try {
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -47,38 +39,12 @@ export async function submitContact(
       ok?: boolean;
       error?: string;
     };
-    dbOk = res.ok && !!data.ok;
-    dbError = data.error ?? "";
+    if (res.ok && data.ok) return { ok: true };
+    return {
+      ok: false,
+      error: data.error ?? "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+    };
   } catch {
-    dbError = "네트워크 오류가 발생했습니다.";
+    return { ok: false, error: "네트워크 오류가 발생했습니다." };
   }
-
-  let emailed = false;
-  const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-  if (key) {
-    try {
-      // FormData (multipart) is a CORS "simple" request — no preflight, which
-      // Web3Forms' endpoint rejects for application/json from the browser.
-      const fd = new FormData();
-      fd.append("access_key", key);
-      fd.append("subject", `[Looping Ai 문의] ${v.projectType} — ${v.name}`);
-      fd.append("from_name", "Looping Ai 랜딩");
-      fd.append("name", v.name);
-      fd.append("email", v.email);
-      fd.append("project_type", v.projectType);
-      fd.append("message", v.message);
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: fd,
-      });
-      const data = (await res.json().catch(() => ({}))) as { success?: boolean };
-      emailed = !!data.success;
-    } catch {}
-  }
-
-  if (dbOk || emailed) return { ok: true };
-  return {
-    ok: false,
-    error: dbError || "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
-  };
 }

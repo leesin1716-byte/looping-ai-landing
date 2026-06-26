@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { validateContact, type ContactValues } from "@/src/lib/contact";
 import { saveInquiry } from "@/src/lib/db";
+import { sendInquiryEmail } from "@/src/lib/email";
 
 export const runtime = "nodejs";
 
@@ -45,6 +46,8 @@ export async function POST(req: Request) {
     );
   }
 
+  // Persist to DB and send the email notification — both server-side,
+  // both best-effort. Succeeds if either channel works.
   let stored = false;
   try {
     stored = await saveInquiry(v);
@@ -52,9 +55,16 @@ export async function POST(req: Request) {
     console.error("inquiry DB insert failed:", e);
   }
 
-  if (!stored) {
+  let emailed = false;
+  try {
+    emailed = await sendInquiryEmail(v);
+  } catch (e) {
+    console.error("inquiry email failed:", e);
+  }
+
+  if (!stored && !emailed) {
     return NextResponse.json(
-      { ok: false, error: "저장소가 아직 설정되지 않았습니다." },
+      { ok: false, error: "폼이 아직 설정되지 않았습니다." },
       { status: 503 },
     );
   }
