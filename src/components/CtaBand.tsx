@@ -1,3 +1,4 @@
+import { site } from "@/src/data/site";
 import MagneticButton from "@/src/components/primitives/MagneticButton";
 import Reveal from "@/src/components/primitives/Reveal";
 
@@ -22,8 +23,14 @@ export default function CtaBand() {
           <p className="mx-auto mt-4 max-w-xl break-keep text-ink-muted">
             아이디어만 있으면 충분합니다. 부담 없이 문의 주시면 빠르게 회신드려요.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-col items-center gap-4">
             <MagneticButton href="#contact">무료로 문의하기</MagneticButton>
+            <a
+              href={`mailto:${site.contactEmail}`}
+              className="text-sm text-ink-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
+            >
+              또는 이메일로 바로 문의 →
+            </a>
           </div>
         </div>
       </Reveal>
