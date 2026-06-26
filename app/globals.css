@@ -28,6 +28,7 @@
 
   --animate-blob: blob 18s ease-in-out infinite;
   --animate-marquee: marquee 28s linear infinite;
+  --animate-marquee-slow: marquee 50s linear infinite;
   --animate-float: float 4s ease-in-out infinite;
   --animate-aurora: aurora 26s ease-in-out infinite;
 
