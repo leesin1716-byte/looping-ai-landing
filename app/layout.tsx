@@ -90,12 +90,18 @@ export default function RootLayout({
             __html: `try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light')}}catch(e){}`,
           }}
         />
-        {/* Speed up the render-blocking Pretendard font CSS/fonts.
-            React hoists this link into <head>. */}
+        {/* Pretendard (Korean body font). Loading the CSS via a <head> link
+            instead of a CSS @import lets the preload scanner fetch it in
+            parallel with globals.css (preconnect above shortens the handshake),
+            avoiding a serial request waterfall before first paint. */}
         <link
           rel="preconnect"
           href="https://cdn.jsdelivr.net"
           crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"
         />
         <a
           href="#top"

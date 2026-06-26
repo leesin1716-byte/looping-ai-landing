@@ -1,4 +1,5 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
+/* Pretendard is loaded via a <link> in app/layout.tsx <head> (not a CSS
+   @import) so it doesn't serialize behind this file before first paint. */
 @import "tailwindcss";
 
 @theme {
