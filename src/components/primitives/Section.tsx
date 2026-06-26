@@ -12,7 +12,16 @@ export default function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className={cn("relative w-full py-24 md:py-32", className)}>
+    <section
+      id={id}
+      className={cn(
+        // overflow-x-clip keeps decorative GradientBlobs from spilling past the
+        // viewport (a horizontal-scroll bug on mobile) while still letting their
+        // glow bleed vertically into neighbouring sections.
+        "relative w-full overflow-x-clip py-24 md:py-32",
+        className,
+      )}
+    >
       <div className={cn("mx-auto w-full max-w-6xl px-5 md:px-8", containerClassName)}>
         {children}
       </div>

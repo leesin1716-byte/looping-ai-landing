@@ -82,6 +82,11 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Decorative blobs/auroras bleed past the viewport edges; clip the
+       horizontal axis so they never create a horizontal scrollbar. `clip`
+       (not `hidden`) avoids establishing a scroll container that would break
+       Lenis smooth scroll / position: sticky. */
+    overflow-x: clip;
     background-image: radial-gradient(
       60% 50% at 50% 0%,
       rgba(139, 92, 246, 0.08),
