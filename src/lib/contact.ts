@@ -57,18 +57,19 @@ export async function submitContact(
   const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
   if (key) {
     try {
+      // FormData (multipart) is a CORS "simple" request — no preflight, which
+      // Web3Forms' endpoint rejects for application/json from the browser.
+      const fd = new FormData();
+      fd.append("access_key", key);
+      fd.append("subject", `[Looping Ai 문의] ${v.projectType} — ${v.name}`);
+      fd.append("from_name", "Looping Ai 랜딩");
+      fd.append("name", v.name);
+      fd.append("email", v.email);
+      fd.append("project_type", v.projectType);
+      fd.append("message", v.message);
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: key,
-          subject: `[Looping Ai 문의] ${v.projectType} — ${v.name}`,
-          from_name: "Looping Ai 랜딩",
-          name: v.name,
-          email: v.email,
-          project_type: v.projectType,
-          message: v.message,
-        }),
+        body: fd,
       });
       const data = (await res.json().catch(() => ({}))) as { success?: boolean };
       emailed = !!data.success;
