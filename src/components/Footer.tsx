@@ -4,9 +4,15 @@ import Icon from "@/src/components/primitives/Icon";
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-white/10">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3 md:px-8">
-        <div className="flex flex-col gap-3">
+    <footer className="relative border-t border-white/10">
+      {/* subtle gradient accent along the top edge */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/50 to-transparent"
+      />
+
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:px-8">
+        <div className="flex flex-col gap-4">
           <a
             href="#top"
             className="flex w-fit items-center gap-2 font-display text-lg font-bold"
@@ -17,8 +23,27 @@ export default function Footer() {
             {site.brand}
           </a>
           <p className="max-w-xs text-sm text-ink-muted">
-            당신의 아이디어, 며칠 만에 웹으로.
+            당신의 아이디어, 며칠 만에 웹으로. 랜딩페이지 · AI 웹사이트 · 대시보드를
+            빠르게 만듭니다.
           </p>
+          <a
+            href={`mailto:${site.contactEmail}`}
+            className="flex w-fit items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink"
+          >
+            <Icon name="mail" size={16} className="text-cyan" />
+            {site.contactEmail}
+          </a>
+          <a
+            href="#contact"
+            className="group flex w-fit items-center gap-1.5 text-sm font-medium text-violet-soft transition-colors hover:text-cyan-soft"
+          >
+            프로젝트 문의하기
+            <Icon
+              name="arrow-up-right"
+              size={15}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </a>
         </div>
 
         <div className="flex flex-col gap-3">
