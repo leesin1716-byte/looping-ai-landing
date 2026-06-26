@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { cn } from "@/src/lib/cn";
 import { useReducedMotion } from "@/src/lib/useReducedMotion";
+import ErrorBoundary from "./ErrorBoundary";
 
 // WebGL is client-only and lazy-loaded so it never blocks first paint.
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
@@ -28,7 +29,11 @@ export default function HeroScene({ className }: { className?: string }) {
         className,
       )}
     >
-      <HeroCanvas />
+      {/* If WebGL is unavailable or the chunk errors, fall back silently to the
+          static HeroBackdrop aurora instead of crashing the page. */}
+      <ErrorBoundary>
+        <HeroCanvas />
+      </ErrorBoundary>
     </div>
   );
 }
