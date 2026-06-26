@@ -101,6 +101,22 @@ export default function ContactForm() {
             <Icon name="mail" size={18} className="text-cyan" />
             {site.contactEmail}
           </a>
+
+          <ul className="flex flex-col gap-2.5 pt-1">
+            {[
+              "무료 상담 · 부담 없는 견적",
+              "제작자가 직접 회신",
+              "며칠 내 첫 시안 확인",
+            ].map((t) => (
+              <li
+                key={t}
+                className="flex items-center gap-2 text-sm text-ink-muted"
+              >
+                <Icon name="check" size={16} className="shrink-0 text-cyan" />
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <Reveal>
