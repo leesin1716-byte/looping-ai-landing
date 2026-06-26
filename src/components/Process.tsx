@@ -37,7 +37,7 @@ export default function Process() {
                   <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet to-cyan text-white shadow-glow transition-transform duration-300 group-hover:scale-110">
                     <Icon name={s.icon as IconName} size={22} />
                   </span>
-                  <span className="font-display text-5xl font-bold leading-none text-white/[0.07]">
+                  <span className="font-display text-5xl font-bold leading-none text-ink/[0.08]">
                     {String(s.step).padStart(2, "0")}
                   </span>
                 </div>

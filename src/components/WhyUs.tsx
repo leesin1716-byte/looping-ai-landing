@@ -32,7 +32,7 @@ export default function WhyUs() {
                   <Icon
                     name={w.icon as IconName}
                     size={128}
-                    className="pointer-events-none absolute -bottom-7 right-2 text-white/[0.04] transition-transform duration-500 group-hover:scale-110 group-hover:text-white/[0.06]"
+                    className="pointer-events-none absolute -bottom-7 right-2 text-ink/[0.05] transition-transform duration-500 group-hover:scale-110 group-hover:text-ink/[0.08]"
                   />
                 )}
                 <div className="relative flex h-full flex-col gap-4">
