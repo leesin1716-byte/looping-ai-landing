@@ -43,8 +43,22 @@ export default function ContactForm() {
       e: React.ChangeEvent<
         HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
       >,
-    ) =>
-      setValues((v) => ({ ...v, [key]: e.target.value }));
+    ) => {
+      const val = e.target.value;
+      setValues((v) => ({ ...v, [key]: val }));
+      // Clear a field's error the moment the user starts correcting it.
+      setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev));
+    };
+
+  // Validate one field when the user leaves it — but don't nag on a pristine
+  // empty field they haven't filled yet (only if it has content or already errored).
+  const onBlur = (key: keyof ContactValues) => () =>
+    setErrors((prev) => {
+      const filled = String(values[key] ?? "").trim();
+      if (!filled && !prev[key]) return prev;
+      const { errors } = validateContact(values);
+      return { ...prev, [key]: errors[key] };
+    });
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,6 +152,7 @@ export default function ContactForm() {
                     type="text"
                     value={values.name}
                     onChange={update("name")}
+                    onBlur={onBlur("name")}
                     placeholder="홍길동"
                     required
                     aria-invalid={!!errors.name}
@@ -155,6 +170,7 @@ export default function ContactForm() {
                     type="email"
                     value={values.email}
                     onChange={update("email")}
+                    onBlur={onBlur("email")}
                     placeholder="you@example.com"
                     required
                     aria-invalid={!!errors.email}
@@ -171,6 +187,7 @@ export default function ContactForm() {
                     id="projectType"
                     value={values.projectType}
                     onChange={update("projectType")}
+                    onBlur={onBlur("projectType")}
                     required
                     aria-invalid={!!errors.projectType}
                     aria-describedby={
@@ -198,6 +215,7 @@ export default function ContactForm() {
                     id="message"
                     value={values.message}
                     onChange={update("message")}
+                    onBlur={onBlur("message")}
                     rows={4}
                     placeholder="어떤 걸 만들고 싶으신가요? 자유롭게 적어 주세요."
                     required
