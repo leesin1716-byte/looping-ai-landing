@@ -115,6 +115,20 @@ export default function Hero() {
               작업물 보기
             </MagneticButton>
           </motion.div>
+
+          <motion.ul
+            variants={item}
+            className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-3 text-sm text-ink-muted"
+          >
+            {["코드·결과물 100% 소유", "제작자와 직접 소통", "며칠 만에 배포"].map(
+              (t) => (
+                <li key={t} className="flex items-center gap-1.5">
+                  <Icon name="check" size={15} className="shrink-0 text-cyan" />
+                  {t}
+                </li>
+              ),
+            )}
+          </motion.ul>
         </motion.div>
       </motion.div>
 
