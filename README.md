@@ -54,7 +54,7 @@ npm run lint     # 린트
 
 > **⚠️ 출시 전 체크리스트 (실제 데이터로 교체):**
 > - `stats.ts` 실적 숫자 · `testimonials.ts` 후기 — 현재 **플레이스홀더(예시값)**. 실제 값으로 바꾸기 전에는 사실인 것처럼 노출하지 마세요.
-> - `site.ts`의 연락 이메일(`hello@looping.ai`)과 소셜 링크를 실제 값으로 설정 (깨진 GitHub 플레이스홀더는 제거됨).
+> - `site.ts`의 연락 이메일(`wchhistory@naver.com`)과 소셜 링크를 실제 값으로 설정 (깨진 GitHub 플레이스홀더는 제거됨).
 > - Vercel 환경변수 `WEB3FORMS_KEY`를 설정해야 문의 폼이 실제로 전송됩니다.
 
 ## 접근성·성능

@@ -60,7 +60,7 @@ const jsonLd = {
     "랜딩페이지 · AI 웹사이트 · 대시보드를 바이브코딩으로 빠르게 제작하는 AI 바이브코더.",
   url: SITE_URL,
   image: `${SITE_URL}/opengraph-image`,
-  email: "hello@looping.ai",
+  email: "wchhistory@naver.com",
   areaServed: "KR",
   knowsLanguage: "ko",
   serviceType: ["랜딩페이지 제작", "AI 웹사이트 개발", "대시보드·웹앱 개발"],

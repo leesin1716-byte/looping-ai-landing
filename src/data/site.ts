@@ -27,6 +27,6 @@ export const site: SiteConfig = {
   ],
   // NOTE: add real social/profile URLs here before launch (a broken GitHub
   // placeholder was removed). mailto is safe to keep.
-  socials: [{ label: "Email", href: "mailto:hello@looping.ai" }],
-  contactEmail: "hello@looping.ai",
+  socials: [{ label: "Email", href: "mailto:wchhistory@naver.com" }],
+  contactEmail: "wchhistory@naver.com",
 };
