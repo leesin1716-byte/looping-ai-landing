@@ -221,6 +221,10 @@ export default function ContactForm() {
                 >
                   {status === "submitting" ? "보내는 중…" : "문의 보내기"}
                 </button>
+
+                <p className="text-center text-xs text-ink-faint">
+                  남겨주신 정보는 문의 응대 목적으로만 사용됩니다.
+                </p>
               </form>
             )}
             </div>
