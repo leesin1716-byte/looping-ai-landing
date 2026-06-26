@@ -23,42 +23,28 @@ export function validateContact(v: ContactValues): {
 }
 
 /**
- * The single network boundary for contact submissions. Swapping Web3Forms for a
- * Next Route Handler + Resend later means editing only this function.
+ * The single network boundary for contact submissions. Posts to our own
+ * Route Handler (`/api/contact`), which re-validates server-side and forwards
+ * to the email provider using a server-only key.
  */
 export async function submitContact(
   v: ContactValues,
 ): Promise<{ ok: boolean; error?: string }> {
-  if (v.company && v.company.trim()) return { ok: true }; // honeypot tripped — pretend success
-
-  const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-  if (!key) {
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(v),
+    });
+    const data = (await res.json().catch(() => ({}))) as {
+      ok?: boolean;
+      error?: string;
+    };
+    if (res.ok && data.ok) return { ok: true };
     return {
       ok: false,
-      error: "폼이 아직 설정되지 않았습니다. (access key 누락)",
+      error: data.error ?? "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
     };
-  }
-
-  try {
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: key,
-        name: v.name,
-        email: v.email,
-        subject: `[Looping Ai 문의] ${v.projectType} — ${v.name}`,
-        project_type: v.projectType,
-        message: v.message,
-      }),
-    });
-    const data = (await res.json()) as { success?: boolean };
-    return data.success
-      ? { ok: true }
-      : { ok: false, error: "전송에 실패했습니다. 잠시 후 다시 시도해 주세요." };
   } catch {
     return { ok: false, error: "네트워크 오류가 발생했습니다." };
   }
