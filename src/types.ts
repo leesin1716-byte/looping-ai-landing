@@ -30,6 +30,7 @@ export type Stat = {
   value: number;
   suffix: string;
   label: string;
+  icon: string;
 };
 
 export type Testimonial = {

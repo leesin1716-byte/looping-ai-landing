@@ -1,6 +1,7 @@
 import { stats } from "@/src/data/stats";
 import Counter from "@/src/components/primitives/Counter";
 import Reveal from "@/src/components/primitives/Reveal";
+import Icon, { type IconName } from "@/src/components/primitives/Icon";
 
 export default function StatsBar() {
   return (
@@ -10,8 +11,11 @@ export default function StatsBar() {
           <Reveal
             key={stat.id}
             delay={i * 0.08}
-            className="flex flex-col items-center gap-1 px-2 text-center md:border-l md:border-white/10 md:first:border-l-0"
+            className="flex flex-col items-center gap-2 px-2 text-center md:border-l md:border-white/10 md:first:border-l-0"
           >
+            <span className="mb-1 grid h-10 w-10 place-items-center rounded-xl glass text-violet-soft">
+              <Icon name={stat.icon as IconName} size={18} />
+            </span>
             <span className="font-display text-4xl font-bold text-gradient md:text-5xl">
               <Counter value={stat.value} suffix={stat.suffix} />
             </span>
