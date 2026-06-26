@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site } from "@/src/data/site";
 import MagneticButton from "@/src/components/primitives/MagneticButton";
 import GradientBlob from "@/src/components/primitives/GradientBlob";
 
@@ -40,6 +41,18 @@ export default function NotFound() {
         <MagneticButton href="/#portfolio" variant="ghost">
           작업물 보기
         </MagneticButton>
+      </div>
+
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ink-muted">
+        {site.nav.map((l) => (
+          <a
+            key={l.href}
+            href={`/${l.href}`}
+            className="transition-colors hover:text-ink"
+          >
+            {l.label}
+          </a>
+        ))}
       </div>
     </main>
   );
