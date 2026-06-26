@@ -82,7 +82,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" className={display.variable}>
+    <html lang="ko" className={display.variable} suppressHydrationWarning>
       <body className="grain min-h-screen">
         {/* Apply the saved/system theme before paint to avoid a flash. */}
         <script
