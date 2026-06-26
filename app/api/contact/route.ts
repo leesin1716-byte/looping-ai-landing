@@ -8,9 +8,9 @@ const str = (v: unknown, max = 5000) =>
   typeof v === "string" ? v.slice(0, max) : "";
 
 /**
- * Server-side contact endpoint. Re-validates input, drops honeypot hits, then
- * persists the inquiry to Postgres (if configured) and sends an email
- * notification via Web3Forms (if configured). Succeeds if either channel works.
+ * Server-side contact endpoint: re-validates, drops honeypot hits, and persists
+ * the inquiry to Postgres. (Email notification is sent from the client via
+ * Web3Forms, whose free plan only allows client-side calls.)
  */
 export async function POST(req: Request) {
   let raw: unknown;
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     company: str(r.company, 200),
   };
 
-  // Honeypot tripped — silently accept without storing/sending.
+  // Honeypot tripped — silently accept without storing.
   if (v.company && v.company.trim()) {
     return NextResponse.json({ ok: true });
   }
@@ -45,7 +45,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // 1) Persist to the database (best-effort — never fail the user on a DB hiccup).
   let stored = false;
   try {
     stored = await saveInquiry(v);
@@ -53,34 +52,9 @@ export async function POST(req: Request) {
     console.error("inquiry DB insert failed:", e);
   }
 
-  // 2) Email notification via Web3Forms (best-effort).
-  let emailed = false;
-  const key = process.env.WEB3FORMS_KEY;
-  if (key) {
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: key,
-          name: v.name,
-          email: v.email,
-          subject: `[Looping Ai 문의] ${v.projectType} — ${v.name}`,
-          project_type: v.projectType,
-          message: v.message,
-          from_name: "Looping Ai 랜딩",
-        }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { success?: boolean };
-      emailed = !!data.success;
-    } catch (e) {
-      console.error("web3forms send failed:", e);
-    }
-  }
-
-  if (!stored && !emailed) {
+  if (!stored) {
     return NextResponse.json(
-      { ok: false, error: "폼이 아직 설정되지 않았습니다. (DB·이메일 미설정)" },
+      { ok: false, error: "저장소가 아직 설정되지 않았습니다." },
       { status: 503 },
     );
   }
