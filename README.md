@@ -35,7 +35,8 @@ npm run lint     # 린트
 
 - [web3forms.com](https://web3forms.com)에서 이메일만으로 무료 access key를 발급받아 `WEB3FORMS_KEY`에 넣으면 즉시 동작합니다.
 - 키가 없으면 폼은 "설정되지 않았습니다" 안내를 표시합니다(빌드는 정상).
-- 제출은 클라이언트 `src/lib/contact.ts` → 서버 라우트 `app/api/contact/route.ts`로 처리됩니다. 서버에서 재검증·허니팟 처리 후 Web3Forms로 전송하며, **키는 서버에만** 둡니다(브라우저 노출 없음). 이메일 발송을 Resend 등으로 바꾸려면 이 라우트만 수정하면 됩니다.
+- 제출은 클라이언트 `src/lib/contact.ts` → 서버 라우트 `app/api/contact/route.ts`로 처리됩니다. 서버에서 재검증·허니팟 처리 후 **① Postgres DB 저장(`src/lib/db.ts`, `POSTGRES_URL` 설정 시 `inquiries` 테이블 자동 생성·적재) + ② Web3Forms 이메일 알림**을 수행하며, **둘 중 하나만 설정돼도** 동작합니다. 키는 서버에만 둡니다(브라우저 노출 없음).
+- 문의를 DB에 쌓으려면 Vercel **Storage → Postgres** 생성(→ `POSTGRES_URL` 자동 주입) 후 재배포하세요. 저장된 문의는 Vercel/Neon 콘솔에서 `SELECT * FROM inquiries ORDER BY created_at DESC`로 확인합니다.
 - 스팸 방지를 위한 허니팟 필드와 클라이언트 검증(필수값·이메일 형식)이 포함되어 있습니다.
 
 ## 콘텐츠 수정
@@ -54,8 +55,8 @@ npm run lint     # 린트
 
 > **⚠️ 출시 전 체크리스트 (실제 데이터로 교체):**
 > - `stats.ts` 실적 숫자 · `testimonials.ts` 후기 — 현재 **플레이스홀더(예시값)**. 실제 값으로 바꾸기 전에는 사실인 것처럼 노출하지 마세요.
-> - `site.ts`의 연락 이메일(`wchhistory@naver.com`)과 소셜 링크를 실제 값으로 설정 (깨진 GitHub 플레이스홀더는 제거됨).
-> - Vercel 환경변수 `WEB3FORMS_KEY`를 설정해야 문의 폼이 실제로 전송됩니다.
+> - 연락 이메일은 `wchhistory@naver.com`로 설정됨. 소셜 링크(GitHub 등)는 필요 시 `site.ts`에 추가.
+> - 문의 폼 동작: Vercel 환경변수 **`WEB3FORMS_KEY`**(이메일 알림) 그리고/또는 **Storage→Postgres**(`POSTGRES_URL` 자동 주입 → `inquiries` 테이블 저장) 중 하나 이상 설정.
 
 ## 접근성·성능
 
