@@ -120,7 +120,7 @@ export default function Hero() {
 
       <div className="absolute inset-x-0 bottom-6 flex flex-col items-center gap-4">
         <a
-          href="#services"
+          href="#portfolio"
           aria-label={site.hero.scrollCue}
           className="flex flex-col items-center gap-1 text-ink-faint transition-colors hover:text-ink-muted"
         >
