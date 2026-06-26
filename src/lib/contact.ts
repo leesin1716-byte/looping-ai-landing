@@ -25,15 +25,18 @@ export function validateContact(v: ContactValues): {
 /**
  * Submits a contact inquiry to our `/api/contact` route, which validates
  * server-side, stores it in the DB, and sends the email notification (Resend).
+ * `meta.t` is the form's render timestamp, used server-side as a timing trap
+ * against instant bot submissions.
  */
 export async function submitContact(
   v: ContactValues,
+  meta?: { t?: number },
 ): Promise<{ ok: boolean; error?: string }> {
   try {
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(v),
+      body: JSON.stringify({ ...v, ...(meta ?? {}) }),
     });
     const data = (await res.json().catch(() => ({}))) as {
       ok?: boolean;

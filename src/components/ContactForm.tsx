@@ -33,6 +33,9 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState("");
+  // When this form first rendered — sent as a timing trap (server rejects
+  // submissions that arrive implausibly fast, i.e. bots).
+  const [startedAt] = useState(() => Date.now());
 
   const update =
     (key: keyof ContactValues) =>
@@ -50,7 +53,7 @@ export default function ContactForm() {
     if (!res.ok) return;
     setStatus("submitting");
     setServerError("");
-    const out = await submitContact(values);
+    const out = await submitContact(values, { t: startedAt });
     if (out.ok) {
       setStatus("success");
       setValues(EMPTY);

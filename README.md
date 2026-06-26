@@ -36,7 +36,7 @@ npm run lint     # 린트
 - 제출은 `src/lib/contact.ts` → 서버 라우트 `app/api/contact/route.ts`로 처리됩니다. 서버에서 재검증·허니팟 후 **① Postgres DB 저장**(`src/lib/db.ts`, `POSTGRES_URL`) + **② Resend 이메일 알림**(`src/lib/email.ts`, `RESEND_API_KEY` → `site.contactEmail`로 발송)을 수행합니다. **둘 중 하나만 설정돼도** 동작하고, 모두 서버 사이드라 키가 노출되지 않습니다.
 - **이메일 알림(Resend):** [resend.com](https://resend.com)에서 무료 API 키 발급 → `RESEND_API_KEY` 설정. 도메인 미인증 시 기본 발신자(`onboarding@resend.dev`)는 **본인 Resend 계정 이메일로만** 보내지므로, 알림 받을 주소로 가입하세요. (커스텀 도메인 인증 후 `RESEND_FROM`으로 발신자 변경 가능.)
 - **문의 저장(Postgres):** Vercel **Storage → Marketplace → Neon(Postgres)** 생성(→ `POSTGRES_URL`/`DATABASE_URL` 자동 주입) 후 재배포. 저장된 문의는 `SELECT * FROM inquiries ORDER BY created_at DESC`로 확인합니다.
-- 스팸 방지 허니팟 + 서버/클라이언트 양쪽 검증(필수값·이메일 형식)이 포함됩니다.
+- **스팸·도배 방지(다층):** ① 허니팟 필드, ② 타임트랩(렌더 후 2초 미만 제출은 봇으로 간주해 조용히 무시), ③ **IP 레이트리밋** — 같은 IP 기준 분당 3회·15분당 6회 초과 시 `429` 반환. 메모리 한도(인스턴스별·즉시) + Postgres 카운트(인스턴스 간 권위 한도)를 함께 사용하며, IP는 `IP_HASH_SALT`로 **해시 저장**(원본 IP는 저장 안 함). 자동화 봇 대량 공격까지 막으려면 Cloudflare Turnstile 같은 캡차 추가를 권장합니다.
 
 ## 콘텐츠 수정
 
