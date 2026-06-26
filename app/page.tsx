@@ -10,6 +10,7 @@ import Faq from "@/src/components/Faq";
 import ContactForm from "@/src/components/ContactForm";
 import Footer from "@/src/components/Footer";
 import StickyCta from "@/src/components/StickyCta";
+import ScrollToTop from "@/src/components/ScrollToTop";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       </main>
       <Footer />
       <StickyCta />
+      <ScrollToTop />
     </>
   );
 }
