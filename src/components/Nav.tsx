@@ -35,6 +35,16 @@ export default function Nav() {
     return () => obs.disconnect();
   }, []);
 
+  // Close the open mobile menu on Escape (keyboard accessibility).
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header
       className={cn(
@@ -98,6 +108,7 @@ export default function Nav() {
             type="button"
             aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
             className="grid h-10 w-10 place-items-center rounded-xl glass"
           >
@@ -107,7 +118,7 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <div className="mx-auto mt-2 max-w-6xl px-4 md:hidden">
+        <div id="mobile-menu" className="mx-auto mt-2 max-w-6xl px-4 md:hidden">
           <ul className="glass flex flex-col gap-1 rounded-2xl p-3">
             {site.nav.map((link) => {
               const isActive = active === link.href;
