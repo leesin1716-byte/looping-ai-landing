@@ -9,6 +9,7 @@ import Testimonials from "@/src/components/Testimonials";
 import Faq from "@/src/components/Faq";
 import ContactForm from "@/src/components/ContactForm";
 import Footer from "@/src/components/Footer";
+import StickyCta from "@/src/components/StickyCta";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <ContactForm />
       </main>
       <Footer />
+      <StickyCta />
     </>
   );
 }
