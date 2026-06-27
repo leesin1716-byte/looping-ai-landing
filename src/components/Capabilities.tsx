@@ -74,6 +74,18 @@ function ChatMock() {
             <div className="h-1.5 w-16 rounded-full bg-white/45" />
           </div>
         </div>
+        <div className="flex items-start gap-1.5">
+          <div className="h-4 w-4 shrink-0 rounded-full bg-gradient-to-br from-violet to-cyan" />
+          <div className="flex items-center gap-1 rounded-lg rounded-tl-none bg-white/[0.06] px-2.5 py-2">
+            {[0, 160, 320].map((d, i) => (
+              <span
+                key={i}
+                style={{ animationDelay: `${d}ms` }}
+                className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-soft/80"
+              />
+            ))}
+          </div>
+        </div>
       </div>
       <div className="flex items-center gap-2 rounded-full bg-white/[0.05] px-2.5 py-2 ring-1 ring-white/10">
         <div className="h-1.5 flex-1 rounded-full bg-white/15" />
