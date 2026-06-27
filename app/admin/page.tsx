@@ -35,9 +35,19 @@ export default async function AdminPage() {
               접수된 문의를 최신순으로 확인합니다.
             </p>
           </div>
-          <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-sm">
-            총 <span className="font-semibold text-cyan-soft">{rows.length}</span>건
-          </span>
+          <div className="flex items-center gap-2.5">
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-sm">
+              총 <span className="font-semibold text-cyan-soft">{rows.length}</span>건
+            </span>
+            {rows.length > 0 && (
+              <a
+                href="/admin/export"
+                className="rounded-full bg-gradient-to-r from-violet to-cyan px-4 py-1.5 text-sm font-medium text-white transition-transform motion-safe:active:scale-95"
+              >
+                CSV 내보내기
+              </a>
+            )}
+          </div>
         </header>
 
         {rows.length === 0 ? (
