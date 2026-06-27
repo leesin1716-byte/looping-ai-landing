@@ -1,6 +1,7 @@
 import Section from "@/src/components/primitives/Section";
 import SectionHeading from "@/src/components/primitives/SectionHeading";
 import Reveal from "@/src/components/primitives/Reveal";
+import AnimatedBars from "@/src/components/primitives/AnimatedBars";
 
 /** Browser-chrome frame wrapping a code-built UI mockup. */
 function Frame({ children }: { children: React.ReactNode }) {
@@ -51,15 +52,7 @@ function DashMock() {
             </div>
           ))}
         </div>
-        <div className="flex flex-1 items-end gap-1.5 rounded-md bg-white/[0.03] p-2">
-          {[45, 72, 52, 92, 63, 80].map((h, i) => (
-            <div
-              key={i}
-              style={{ height: `${h}%` }}
-              className="flex-1 rounded-sm bg-gradient-to-t from-violet to-cyan"
-            />
-          ))}
-        </div>
+        <AnimatedBars />
       </div>
     </div>
   );
