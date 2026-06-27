@@ -6,6 +6,7 @@ import Portfolio from "@/src/components/Portfolio";
 import CtaBand from "@/src/components/CtaBand";
 import Process from "@/src/components/Process";
 import WhyUs from "@/src/components/WhyUs";
+import TechStack from "@/src/components/TechStack";
 import Testimonials from "@/src/components/Testimonials";
 import Faq from "@/src/components/Faq";
 import ContactForm from "@/src/components/ContactForm";
@@ -25,6 +26,7 @@ export default function Home() {
         <CtaBand />
         <Process />
         <WhyUs />
+        <TechStack />
         <Testimonials />
         <Faq />
         <ContactForm />
