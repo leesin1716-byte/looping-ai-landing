@@ -81,3 +81,34 @@ export async function recentInquiryCount(
     return null;
   }
 }
+
+export type InquiryRow = {
+  id: number;
+  name: string;
+  email: string;
+  project_type: string;
+  message: string;
+  created_at: string;
+};
+
+/**
+ * Most recent stored inquiries, newest first — for the protected /admin view.
+ * Returns an empty array when no DB is configured or the query fails.
+ */
+export async function getInquiries(limit = 200): Promise<InquiryRow[]> {
+  const db = getPool();
+  if (!db) return [];
+  try {
+    await ensureTable(db);
+    const { rows } = await db.sql`
+      SELECT id, name, email, project_type, message, created_at
+      FROM inquiries
+      ORDER BY created_at DESC
+      LIMIT ${limit}
+    `;
+    return rows as InquiryRow[];
+  } catch (e) {
+    console.error("getInquiries failed:", e);
+    return [];
+  }
+}
