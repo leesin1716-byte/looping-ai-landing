@@ -1,6 +1,7 @@
 import Nav from "@/src/components/Nav";
 import Hero from "@/src/components/Hero";
 import StatsBar from "@/src/components/StatsBar";
+import Capabilities from "@/src/components/Capabilities";
 import Portfolio from "@/src/components/Portfolio";
 import CtaBand from "@/src/components/CtaBand";
 import Process from "@/src/components/Process";
@@ -19,6 +20,7 @@ export default function Home() {
       <main>
         <Hero />
         <StatsBar />
+        <Capabilities />
         <Portfolio />
         <CtaBand />
         <Process />
