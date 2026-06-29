@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { portfolio } from "@/src/data/portfolio";
 import Section from "@/src/components/primitives/Section";
 import SectionHeading from "@/src/components/primitives/SectionHeading";
@@ -43,10 +44,15 @@ export default function Portfolio() {
                 </div>
 
                 {p.image ? (
-                  <div
-                    className="absolute inset-x-0 bottom-0 top-8 bg-cover bg-top"
-                    style={{ backgroundImage: `url(${p.image})` }}
-                  />
+                  <div className="absolute inset-x-0 bottom-0 top-8">
+                    <Image
+                      src={p.image}
+                      alt={`${p.title} 미리보기`}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
                 ) : (
                   <iframe
                     src={p.url}
