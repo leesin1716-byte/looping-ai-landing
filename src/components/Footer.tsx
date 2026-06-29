@@ -1,4 +1,5 @@
 import { site } from "@/src/data/site";
+import { services } from "@/src/data/services";
 import Icon from "@/src/components/primitives/Icon";
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet/50 to-transparent"
       />
 
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.6fr_1fr_1fr_1fr] md:px-8">
         <div className="flex flex-col gap-4">
           <a
             href="#top"
@@ -56,6 +57,22 @@ export default function Footer() {
                   className="text-sm text-ink-muted transition-colors hover:text-ink"
                 >
                   {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <span className="text-sm font-medium text-ink">서비스</span>
+          <ul className="flex flex-col gap-2">
+            {services.map((s) => (
+              <li key={s.id}>
+                <a
+                  href="#pricing"
+                  className="text-sm text-ink-muted transition-colors hover:text-ink"
+                >
+                  {s.title}
                 </a>
               </li>
             ))}
