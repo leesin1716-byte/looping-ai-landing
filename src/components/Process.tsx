@@ -44,6 +44,12 @@ export default function Process() {
                 <div className="flex flex-col gap-2">
                   <h3 className="font-display text-lg font-semibold">{s.title}</h3>
                   <p className="text-sm text-ink-muted">{s.desc}</p>
+                  {s.deliverable && (
+                    <span className="mt-1.5 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-cyan-soft">
+                      <Icon name="check" size={12} />
+                      받는 것 · {s.deliverable}
+                    </span>
+                  )}
                 </div>
               </div>
             </Reveal>

@@ -23,6 +23,7 @@ export type ProcessStep = {
   title: string;
   desc: string;
   icon: string;
+  deliverable?: string;
 };
 
 export type Stat = {
