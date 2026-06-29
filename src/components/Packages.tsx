@@ -5,6 +5,15 @@ import Section from "@/src/components/primitives/Section";
 import SectionHeading from "@/src/components/primitives/SectionHeading";
 import Reveal from "@/src/components/primitives/Reveal";
 import Icon, { type IconName } from "@/src/components/primitives/Icon";
+import PackageCta from "@/src/components/PackageCta";
+
+// Maps a package to the matching 프로젝트 유형 option in the contact form,
+// so the CTA can pre-select it. Keys are package ids.
+const FORM_TYPE: Record<string, string> = {
+  landing: "랜딩페이지",
+  "web-app": "AI 웹사이트",
+  dashboard: "대시보드·웹앱",
+};
 
 function PackageCard({ p }: { p: Package }) {
   const body = (
@@ -55,18 +64,7 @@ function PackageCard({ p }: { p: Package }) {
         ))}
       </ul>
 
-      <a
-        href="#contact"
-        className={cn(
-          "relative mt-7 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-transform motion-safe:active:scale-95",
-          p.highlight
-            ? "bg-gradient-to-r from-violet to-cyan text-white shadow-glow"
-            : "border border-white/10 bg-white/[0.04] hover:border-white/25",
-        )}
-      >
-        {p.cta}
-        <Icon name="arrow-up-right" size={15} />
-      </a>
+      <PackageCta type={FORM_TYPE[p.id]} highlight={p.highlight} label={p.cta} />
     </div>
   );
 

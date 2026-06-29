@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   validateContact,
   submitContact,
@@ -36,6 +36,22 @@ export default function ContactForm() {
   // When this form first rendered — sent as a timing trap (server rejects
   // submissions that arrive implausibly fast, i.e. bots).
   const [startedAt] = useState(() => Date.now());
+
+  // Pricing CTAs dispatch "prefill-project-type" — pre-select the matching
+  // 프로젝트 유형 when a visitor arrives from a package card.
+  useEffect(() => {
+    const onPrefill = (e: Event) => {
+      const t = (e as CustomEvent<string>).detail;
+      if (typeof t === "string" && PROJECT_TYPES.includes(t)) {
+        setValues((v) => ({ ...v, projectType: t }));
+        setErrors((prev) =>
+          prev.projectType ? { ...prev, projectType: undefined } : prev,
+        );
+      }
+    };
+    window.addEventListener("prefill-project-type", onPrefill);
+    return () => window.removeEventListener("prefill-project-type", onPrefill);
+  }, []);
 
   const update =
     (key: keyof ContactValues) =>
