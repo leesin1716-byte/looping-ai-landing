@@ -38,7 +38,7 @@ function post(body: unknown, headers: Record<string, string> = {}) {
 beforeEach(() => {
   vi.clearAllMocks();
   mCount.mockResolvedValue(null); // no DB-backed count by default
-  mSave.mockResolvedValue(true);
+  mSave.mockResolvedValue(1); // saved → returns the new row id
   mEmail.mockResolvedValue(true);
 });
 
@@ -80,14 +80,14 @@ describe("POST /api/contact", () => {
   });
 
   it("still succeeds via email when the DB is unavailable", async () => {
-    mSave.mockResolvedValue(false);
+    mSave.mockResolvedValue(null);
     const res = await post(valid);
     expect(res.status).toBe(200);
     expect((await res.json()).ok).toBe(true);
   });
 
   it("returns 503 when neither DB nor email is configured", async () => {
-    mSave.mockResolvedValue(false);
+    mSave.mockResolvedValue(null);
     mEmail.mockResolvedValue(false);
     const res = await post(valid);
     expect(res.status).toBe(503);

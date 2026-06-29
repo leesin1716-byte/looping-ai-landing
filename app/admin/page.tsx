@@ -82,6 +82,14 @@ export default async function AdminPage() {
                 <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-ink-muted">
                   {r.message}
                 </p>
+                <div className="mt-4 flex justify-end">
+                  <a
+                    href={`/admin/reply/${r.id}`}
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-sm font-medium transition-colors hover:border-white/25 hover:bg-white/[0.07]"
+                  >
+                    답장하기 →
+                  </a>
+                </div>
               </li>
             ))}
           </ul>

@@ -103,21 +103,21 @@ export async function POST(req: Request) {
 
   // Persist to DB and send the email notification — both server-side,
   // both best-effort. Succeeds if either channel works.
-  let stored = false;
+  let savedId: number | null = null;
   try {
-    stored = await saveInquiry(v, ipHash);
+    savedId = await saveInquiry(v, ipHash);
   } catch (e) {
     console.error("inquiry DB insert failed:", e);
   }
 
   let emailed = false;
   try {
-    emailed = await sendInquiryEmail(v);
+    emailed = await sendInquiryEmail(v, savedId);
   } catch (e) {
     console.error("inquiry email failed:", e);
   }
 
-  if (!stored && !emailed) {
+  if (savedId === null && !emailed) {
     return NextResponse.json(
       { ok: false, error: "폼이 아직 설정되지 않았습니다." },
       { status: 503 },

@@ -37,23 +37,25 @@ async function ensureTable(db: Pool) {
 
 /**
  * Persists a contact inquiry when a Postgres connection is configured.
- * Best-effort: returns true if stored, false if no DB is configured.
- * The table is created on first use. `ipHash` (a hashed client IP) is stored
- * only for abuse/rate-limit accounting — never the raw IP.
+ * Best-effort: returns the new row's id when stored, or null if no DB is
+ * configured. The table is created on first use. `ipHash` (a hashed client IP)
+ * is stored only for abuse/rate-limit accounting — never the raw IP.
  */
 export async function saveInquiry(
   v: ContactValues,
   ipHash: string | null = null,
-): Promise<boolean> {
+): Promise<number | null> {
   const db = getPool();
-  if (!db) return false;
+  if (!db) return null;
 
   await ensureTable(db);
-  await db.sql`
+  const { rows } = await db.sql`
     INSERT INTO inquiries (name, email, project_type, message, ip_hash)
     VALUES (${v.name}, ${v.email}, ${v.projectType}, ${v.message}, ${ipHash})
+    RETURNING id
   `;
-  return true;
+  const id = rows[0]?.id;
+  return id != null ? Number(id) : null;
 }
 
 /**
@@ -110,5 +112,27 @@ export async function getInquiries(limit = 200): Promise<InquiryRow[]> {
   } catch (e) {
     console.error("getInquiries failed:", e);
     return [];
+  }
+}
+
+/**
+ * Loads a single inquiry by id — for the protected /admin reply view.
+ * Returns null when no DB is configured, the id is unknown, or the query fails.
+ */
+export async function getInquiryById(id: number): Promise<InquiryRow | null> {
+  const db = getPool();
+  if (!db || !Number.isInteger(id) || id <= 0) return null;
+  try {
+    await ensureTable(db);
+    const { rows } = await db.sql`
+      SELECT id, name, email, project_type, message, created_at
+      FROM inquiries
+      WHERE id = ${id}
+      LIMIT 1
+    `;
+    return (rows[0] as InquiryRow) ?? null;
+  } catch (e) {
+    console.error("getInquiryById failed:", e);
+    return null;
   }
 }
