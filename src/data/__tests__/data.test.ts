@@ -7,6 +7,11 @@ import { testimonials } from "@/src/data/testimonials";
 import { packages } from "@/src/data/packages";
 import { comparison } from "@/src/data/comparison";
 import { guarantees } from "@/src/data/guarantees";
+import {
+  estimatorTypes,
+  estimatorScales,
+  estimatorOptions,
+} from "@/src/data/estimator";
 import { site } from "@/src/data/site";
 
 describe("content data", () => {
@@ -78,5 +83,20 @@ describe("content data", () => {
       expect(g.title).toBeTruthy();
       expect(g.desc).toBeTruthy();
     }
+  });
+
+  it("has a valid estimator config", () => {
+    for (const set of [estimatorTypes, estimatorScales, estimatorOptions]) {
+      expect(set.length).toBeGreaterThan(0);
+      expect(new Set(set.map((x) => x.id)).size).toBe(set.length);
+    }
+    for (const t of estimatorTypes) {
+      expect(t.base).toBeGreaterThan(0);
+      expect(t.formType).toBeTruthy();
+      expect(t.weeks[0]).toBeGreaterThan(0);
+      expect(t.weeks[1]).toBeGreaterThanOrEqual(t.weeks[0]);
+    }
+    for (const s of estimatorScales) expect(s.mult).toBeGreaterThan(0);
+    for (const o of estimatorOptions) expect(o.add).toBeGreaterThanOrEqual(0);
   });
 });
