@@ -42,3 +42,6 @@ export const estimatorOptions: EstimatorOption[] = [
   { id: "i18n", label: "다국어 지원", add: 60 },
   { id: "design", label: "디자인 고도화", add: 90 },
 ];
+
+// Optional ongoing care, shown separately from the one-time estimate. 만원/월.
+export const estimatorMaintenance = { label: "런칭 후 유지보수", monthly: 15 };

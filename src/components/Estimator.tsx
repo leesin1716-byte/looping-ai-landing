@@ -4,6 +4,7 @@ import {
   estimatorTypes,
   estimatorScales,
   estimatorOptions,
+  estimatorMaintenance,
 } from "@/src/data/estimator";
 import { cn } from "@/src/lib/cn";
 import Section from "@/src/components/primitives/Section";
@@ -17,6 +18,7 @@ export default function Estimator() {
   const [typeId, setTypeId] = useState("webapp");
   const [scaleId, setScaleId] = useState("m");
   const [opts, setOpts] = useState<Set<string>>(new Set());
+  const [maint, setMaint] = useState(false);
 
   const { low, high, weeks } = useMemo(() => {
     const type = estimatorTypes.find((t) => t.id === typeId)!;
@@ -123,6 +125,40 @@ export default function Estimator() {
                 })}
               </div>
             </Group>
+
+            <button
+              type="button"
+              aria-pressed={maint}
+              onClick={() => setMaint((v) => !v)}
+              className={cn(
+                "flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left transition-colors",
+                maint
+                  ? "border-violet/50 bg-violet/15"
+                  : "border-white/10 bg-white/[0.03] hover:border-white/25",
+              )}
+            >
+              <span className="flex flex-col">
+                <span className="text-sm font-medium text-ink">
+                  {estimatorMaintenance.label}
+                </span>
+                <span className="text-xs text-ink-faint">
+                  월 ₩{estimatorMaintenance.monthly}만 · 운영·수정·모니터링
+                </span>
+              </span>
+              <span
+                className={cn(
+                  "relative h-6 w-10 shrink-0 rounded-full transition-colors",
+                  maint ? "bg-gradient-to-r from-violet to-cyan" : "bg-white/15",
+                )}
+              >
+                <span
+                  className={cn(
+                    "absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform",
+                    maint ? "translate-x-[18px]" : "translate-x-0.5",
+                  )}
+                />
+              </span>
+            </button>
           </div>
 
           {/* Result */}
@@ -139,6 +175,12 @@ export default function Estimator() {
                   <Icon name="bolt" size={16} className="text-cyan" />
                   예상 기간 약 {weeks[0]}~{weeks[1]}주
                 </div>
+                {maint && (
+                  <div className="mt-2 flex items-center gap-2 text-sm text-ink-muted">
+                    <Icon name="loop" size={16} className="text-violet-soft" />
+                    유지보수 월 ₩{estimatorMaintenance.monthly}만 (선택)
+                  </div>
+                )}
                 <p className="mt-5 text-xs leading-relaxed text-ink-faint">
                   참고용 예상 범위입니다. 실제 비용·일정은 요구사항에 따라
                   상담 후 정확히 안내드려요.
