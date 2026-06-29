@@ -4,9 +4,28 @@ import type { Testimonial } from "@/src/types";
 import Section from "@/src/components/primitives/Section";
 import SectionHeading from "@/src/components/primitives/SectionHeading";
 import Reveal from "@/src/components/primitives/Reveal";
-import Icon from "@/src/components/primitives/Icon";
 import { cn } from "@/src/lib/cn";
 import { useReducedMotion } from "@/src/lib/useReducedMotion";
+
+function Stars({ n = 5 }: { n?: number }) {
+  return (
+    <div className="flex gap-0.5" aria-label={`별점 ${n}점 / 5점`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg
+          key={i}
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className={i < n ? "text-cyan-soft" : "text-ink-faint/30"}
+          aria-hidden
+        >
+          <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
 
 function Card({ t, className }: { t: Testimonial; className?: string }) {
   return (
@@ -16,7 +35,7 @@ function Card({ t, className }: { t: Testimonial; className?: string }) {
         className,
       )}
     >
-      <Icon name="sparkles" className="text-violet-soft" />
+      <Stars n={t.rating ?? 5} />
       <blockquote className="text-sm leading-relaxed text-ink md:text-base">
         “{t.quote}”
       </blockquote>

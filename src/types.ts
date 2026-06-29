@@ -38,6 +38,7 @@ export type Testimonial = {
   quote: string;
   author: string;
   role: string;
+  rating?: number; // 1–5, defaults to 5
 };
 
 export type WhyPoint = {
