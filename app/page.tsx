@@ -8,6 +8,7 @@ import Process from "@/src/components/Process";
 import WhyUs from "@/src/components/WhyUs";
 import Comparison from "@/src/components/Comparison";
 import Packages from "@/src/components/Packages";
+import Guarantee from "@/src/components/Guarantee";
 import TechStack from "@/src/components/TechStack";
 import Testimonials from "@/src/components/Testimonials";
 import Faq from "@/src/components/Faq";
@@ -40,6 +41,7 @@ export default function Home() {
         <WhyUs />
         <Comparison />
         <Packages />
+        <Guarantee />
         <TechStack />
         <Testimonials />
         <Faq />

@@ -53,6 +53,12 @@ export type Faq = {
   a: string;
 };
 
+export type Guarantee = {
+  icon: string;
+  title: string;
+  desc: string;
+};
+
 export type ComparisonRow = {
   feature: string;
   diy: string;
