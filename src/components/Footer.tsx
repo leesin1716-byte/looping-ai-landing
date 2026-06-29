@@ -104,7 +104,15 @@ export default function Footer() {
           <span className="text-xs text-ink-faint">
             © {year} {site.brand}. All rights reserved.
           </span>
-          <span className="text-xs text-ink-faint">Built with Next.js</span>
+          <div className="flex items-center gap-4">
+            <a
+              href="/privacy"
+              className="text-xs text-ink-faint transition-colors hover:text-ink-muted"
+            >
+              개인정보처리방침
+            </a>
+            <span className="text-xs text-ink-faint">Built with Next.js</span>
+          </div>
         </div>
       </div>
     </footer>
