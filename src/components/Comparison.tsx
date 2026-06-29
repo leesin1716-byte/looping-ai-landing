@@ -46,19 +46,19 @@ export default function Comparison() {
                   <tr key={r.feature} className="group">
                     <th
                       scope="row"
-                      className="border-t border-white/10 p-4 text-sm font-semibold"
+                      className="border-t border-white/10 p-4 text-sm font-semibold transition-colors group-hover:bg-white/[0.03]"
                     >
                       {r.feature}
                     </th>
-                    <td className="border-t border-white/10 p-4 text-center text-sm text-ink-faint">
+                    <td className="border-t border-white/10 p-4 text-center text-sm text-ink-faint transition-colors group-hover:bg-white/[0.03]">
                       {r.diy}
                     </td>
-                    <td className="border-t border-white/10 p-4 text-center text-sm text-ink-muted">
+                    <td className="border-t border-white/10 p-4 text-center text-sm text-ink-muted transition-colors group-hover:bg-white/[0.03]">
                       {r.agency}
                     </td>
                     <td
                       className={[
-                        "border-x border-violet/20 bg-violet/[0.07] p-4 text-center text-sm font-medium text-ink",
+                        "border-x border-violet/20 bg-violet/[0.07] p-4 text-center text-sm font-medium text-ink transition-colors group-hover:bg-violet/[0.12]",
                         first ? "rounded-t-2xl border-t" : "border-t border-t-white/10",
                         last ? "rounded-b-2xl border-b border-b-violet/20" : "",
                       ].join(" ")}
