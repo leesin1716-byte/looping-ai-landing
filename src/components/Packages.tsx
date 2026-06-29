@@ -102,6 +102,15 @@ export default function Packages() {
       <p className="mt-8 text-center text-sm text-ink-faint">
         모든 패키지는 무료 상담 후 시작합니다 · 일정과 견적을 먼저 명확히 안내드려요.
       </p>
+      <div className="mt-3 text-center">
+        <a
+          href="#estimate"
+          className="inline-flex items-center gap-1 text-sm text-cyan-soft transition-opacity hover:opacity-80"
+        >
+          내 프로젝트 예상 견적 계산해보기
+          <Icon name="chevron-down" size={15} />
+        </a>
+      </div>
     </Section>
   );
 }
