@@ -50,8 +50,17 @@ function inquiryHtml(v: ContactValues): string {
           <div style="font-size:13px;color:#9a9aa8;margin-bottom:8px;">내용</div>
           <div style="background:#f7f7fb;border-radius:12px;padding:18px;font-size:15px;line-height:1.7;color:#23232e;white-space:pre-wrap;">${message}</div>
         </td></tr>
-        <tr><td style="padding:20px 34px 30px 34px;">
-          <a href="mailto:${email}" style="display:inline-block;background:linear-gradient(90deg,#8b5cf6,#22d3ee);color:#ffffff;text-decoration:none;font-weight:700;font-size:15px;padding:13px 28px;border-radius:12px;">답장하기 →</a>
+        <tr><td style="padding:18px 34px 30px 34px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f7fb;border:1px solid #ececf1;border-radius:12px;">
+            <tr><td style="padding:16px 18px;">
+              <div style="font-size:13px;font-weight:700;color:#15151f;margin-bottom:6px;">답장하려면 ✉️</div>
+              <div style="font-size:14px;line-height:1.65;color:#5a5a68;">
+                이 메일의 <strong style="color:#7c3aed;">'답장'</strong> 버튼을 누르면 문의자
+                (<a href="mailto:${email}" style="color:#7c3aed;text-decoration:none;font-weight:600;">${email}</a>)
+                에게 바로 회신됩니다. 회신 주소가 자동으로 설정되어 있어요.
+              </div>
+            </td></tr>
+          </table>
         </td></tr>
         <tr><td style="padding:16px 34px;background:#fafafc;border-top:1px solid #f0f0f4;font-size:12px;color:#a6a6b4;">
           이 메일은 <strong style="color:#7a7a88;">Looping Ai</strong> 랜딩페이지 문의 폼에서 자동 발송되었습니다.
