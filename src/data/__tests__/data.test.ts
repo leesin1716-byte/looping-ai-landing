@@ -4,6 +4,9 @@ import { portfolio } from "@/src/data/portfolio";
 import { stats } from "@/src/data/stats";
 import { processSteps } from "@/src/data/process";
 import { testimonials } from "@/src/data/testimonials";
+import { packages } from "@/src/data/packages";
+import { comparison } from "@/src/data/comparison";
+import { guarantees } from "@/src/data/guarantees";
 import { site } from "@/src/data/site";
 
 describe("content data", () => {
@@ -44,5 +47,36 @@ describe("content data", () => {
   it("has non-empty copy in hero", () => {
     expect(site.hero.headline.length).toBeGreaterThan(0);
     expect(site.hero.cta.length).toBeGreaterThan(0);
+  });
+
+  it("has pricing packages with unique ids and exactly one highlighted", () => {
+    expect(packages.length).toBeGreaterThan(0);
+    expect(new Set(packages.map((p) => p.id)).size).toBe(packages.length);
+    expect(packages.filter((p) => p.highlight).length).toBe(1);
+    for (const p of packages) {
+      expect(p.name).toBeTruthy();
+      expect(p.price).toBeTruthy();
+      expect(p.cta).toBeTruthy();
+      expect(p.features.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("has comparison rows that fill all three columns", () => {
+    expect(comparison.length).toBeGreaterThan(0);
+    for (const r of comparison) {
+      expect(r.feature).toBeTruthy();
+      expect(r.diy).toBeTruthy();
+      expect(r.agency).toBeTruthy();
+      expect(r.us).toBeTruthy();
+    }
+  });
+
+  it("has guarantees with icon, title and description", () => {
+    expect(guarantees.length).toBeGreaterThan(0);
+    for (const g of guarantees) {
+      expect(g.icon).toBeTruthy();
+      expect(g.title).toBeTruthy();
+      expect(g.desc).toBeTruthy();
+    }
   });
 });
