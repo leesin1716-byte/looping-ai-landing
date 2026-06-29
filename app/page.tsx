@@ -6,6 +6,7 @@ import Portfolio from "@/src/components/Portfolio";
 import CtaBand from "@/src/components/CtaBand";
 import Process from "@/src/components/Process";
 import WhyUs from "@/src/components/WhyUs";
+import Comparison from "@/src/components/Comparison";
 import Packages from "@/src/components/Packages";
 import TechStack from "@/src/components/TechStack";
 import Testimonials from "@/src/components/Testimonials";
@@ -37,6 +38,7 @@ export default function Home() {
         <CtaBand />
         <Process />
         <WhyUs />
+        <Comparison />
         <Packages />
         <TechStack />
         <Testimonials />

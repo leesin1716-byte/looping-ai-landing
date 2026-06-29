@@ -52,6 +52,13 @@ export type Faq = {
   a: string;
 };
 
+export type ComparisonRow = {
+  feature: string;
+  diy: string;
+  agency: string;
+  us: string;
+};
+
 export type Package = {
   id: string;
   name: string;
