@@ -52,6 +52,19 @@ export type Faq = {
   a: string;
 };
 
+export type Package = {
+  id: string;
+  name: string;
+  tagline: string;
+  price: string;
+  priceNote: string;
+  icon: string;
+  features: string[];
+  cta: string;
+  highlight: boolean;
+  badge?: string;
+};
+
 export type SiteConfig = {
   brand: string;
   nav: NavLink[];

@@ -4,6 +4,7 @@ export const site: SiteConfig = {
   brand: "Looping Ai",
   nav: [
     { label: "작업물", href: "#portfolio" },
+    { label: "요금제", href: "#pricing" },
     { label: "후기", href: "#testimonials" },
     { label: "FAQ", href: "#faq" },
     { label: "문의", href: "#contact" },
