@@ -2,6 +2,7 @@ import Nav from "@/src/components/Nav";
 import Hero from "@/src/components/Hero";
 import StatsBar from "@/src/components/StatsBar";
 import Capabilities from "@/src/components/Capabilities";
+import Audiences from "@/src/components/Audiences";
 import Portfolio from "@/src/components/Portfolio";
 import CtaBand from "@/src/components/CtaBand";
 import Process from "@/src/components/Process";
@@ -36,6 +37,7 @@ export default function Home() {
         <Hero />
         <StatsBar />
         <Capabilities />
+        <Audiences />
         <Portfolio />
         <CtaBand />
         <Process />

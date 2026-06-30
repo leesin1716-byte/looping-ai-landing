@@ -7,6 +7,7 @@ import { testimonials } from "@/src/data/testimonials";
 import { packages } from "@/src/data/packages";
 import { comparison } from "@/src/data/comparison";
 import { guarantees } from "@/src/data/guarantees";
+import { audiences } from "@/src/data/audiences";
 import {
   estimatorTypes,
   estimatorScales,
@@ -82,6 +83,15 @@ describe("content data", () => {
       expect(g.icon).toBeTruthy();
       expect(g.title).toBeTruthy();
       expect(g.desc).toBeTruthy();
+    }
+  });
+
+  it("has audiences with icon, title and description", () => {
+    expect(audiences.length).toBeGreaterThan(0);
+    for (const a of audiences) {
+      expect(a.icon).toBeTruthy();
+      expect(a.title).toBeTruthy();
+      expect(a.desc).toBeTruthy();
     }
   });
 

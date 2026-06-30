@@ -60,6 +60,12 @@ export type Guarantee = {
   desc: string;
 };
 
+export type Audience = {
+  icon: string;
+  title: string;
+  desc: string;
+};
+
 export type ComparisonRow = {
   feature: string;
   diy: string;
